@@ -18,6 +18,8 @@ void Init_SIMD_FloatArray(VALUE parent)
 	rb_define_method(SIMD_FloatArray, "^", method_xor, 1);
 	rb_define_method(SIMD_FloatArray, "gt", method_gt, 1);
 	rb_define_method(SIMD_FloatArray, "lt", method_lt, 1);
+	rb_define_method(SIMD_FloatArray, "gteq", method_gteq, 1);
+	rb_define_method(SIMD_FloatArray, "lteq", method_lteq, 1);
 	rb_define_method(SIMD_FloatArray, "length", method_length, 0);
 	rb_define_method(SIMD_FloatArray, "to_a", method_to_a, 0);
 }
@@ -116,6 +118,20 @@ static VALUE method_lt(VALUE self, VALUE obj)
 	return(internal_apply_operation(self, obj, sizeof(double), SIMD_LongArray, func_lt));
 }
 
+/* Public: find the larger value between the data array and another
+ * another FloatArray object, returning a new LongArray. */
+static VALUE method_gteq(VALUE self, VALUE obj)
+{
+	return(internal_apply_operation(self, obj, sizeof(double), SIMD_LongArray, func_gteq));
+}
+
+/* Public: find the less value between the data array and another
+ * another FloatArray object, returning a new LongArray. */
+static VALUE method_lteq(VALUE self, VALUE obj)
+{
+	return(internal_apply_operation(self, obj, sizeof(double), SIMD_LongArray, func_lteq));
+}
+
 /* Public: Return a Ruby Array containing the doubles within the data array. */
 static VALUE method_to_a(VALUE self)
 {
@@ -187,4 +203,16 @@ static void func_gt(void *v1, void *v2, void *r)
 static void func_lt(void *v1, void *v2, void *r)
 {
 	*(l2v *)r = (*(d2v *)v1 < *(d2v *)v2);
+}
+
+/* Function: Return Greater Than or Equal To Vector */
+static void func_gteq(void *v1, void *v2, void *r)
+{
+	 *(l2v *)r = (*(d2v *)v1 >= *(d2v *)v2);
+}
+
+/* Function: Return Less Than or Equal To Vector */
+static void func_lteq(void *v1, void *v2, void *r)
+{
+	*(l2v *)r = (*(d2v *)v1 <= *(d2v *)v2);
 }
