@@ -196,23 +196,23 @@ static void func_xor(void *v1, void *v2, void *r)
 /* Function: Return Greater Than Vector */
 static void func_gt(void *v1, void *v2, void *r)
 {
-	 *(l2v *)r =  *(d2v *)v2) > (*(d2v *)v1;
+	 *(l2v *)r =  *(d2v *)v2 > *(d2v *)v1;
 }
 
 /* Function: Return Less Than Vector */
 static void func_lt(void *v1, void *v2, void *r)
 {
-	*(l2v *)r =  *(d2v *)v2) < (*(d2v *)v1;
+	*(l2v *)r =  *(d2v *)v2 < *(d2v *)v1;
 }
 
 /* Function: Return Greater Than or Equal To Vector */
 static void func_gteq(void *v1, void *v2, void *r)
 {
-	 *(l2v *)r =  *(d2v *)v2) >=  (*(d2v *)v1;
+	 *(l2v *)r =  *(d2v *)v2 >=  *(d2v *)v1;
 }
 
 /* Function: Return Less Than or Equal To Vector */
 static void func_lteq(void *v1, void *v2, void *r)
 {
-	*(l2v *)r =  *(d2v *)v2) <= (*(d2v *)v1;
+	*(l2v *)r =  *(d2v *)v2 <= *(d2v *)v1;
 }
